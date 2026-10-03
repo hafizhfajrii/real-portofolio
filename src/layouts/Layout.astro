@@ -298,6 +298,57 @@ const {
           setTimeout(() => toast.remove(), 400);
         }, 3500);
       };
+
+      // ==========================================================
+      // 🚀 CINEMATIC SCROLL REVEAL ENGINE (INTERSECTION OBSERVER)
+      // ==========================================================
+      function initScrollReveal() {
+        const revealElements = document.querySelectorAll('.reveal-on-scroll');
+        if (!revealElements.length) return;
+
+        // Check for reduced motion preference
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          revealElements.forEach((el) => el.classList.add('is-revealed'));
+          return;
+        }
+
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px 0px -40px 0px',
+          threshold: 0.08
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        revealElements.forEach((el) => {
+          revealObserver.observe(el);
+        });
+
+        // Stagger container helper (if any container has .reveal-stagger-group)
+        const staggerGroups = document.querySelectorAll('.reveal-stagger-group');
+        staggerGroups.forEach((group) => {
+          const children = group.querySelectorAll('.reveal-on-scroll');
+          children.forEach((child, idx) => {
+            if (!(child as HTMLElement).style.transitionDelay && !child.className.includes('delay-')) {
+              (child as HTMLElement).style.transitionDelay = `${idx * 120}ms`;
+            }
+          });
+        });
+      }
+
+      // Execute on DOM ready and dynamic transitions
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initScrollReveal);
+      } else {
+        initScrollReveal();
+      }
     </script>
 
     <style is:global>

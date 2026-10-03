@@ -7,7 +7,7 @@ const enSkills = content.en.skills;
 <section id="skills" class="skills-section section-primary transition-colors duration-300">
   <div class="container">
     <!-- Section Header -->
-    <div class="section-header">
+    <div class="section-header reveal-on-scroll">
       <span class="section-tag" data-i18n-id={skills.sectionTag} data-i18n-en={enSkills.sectionTag}>
         <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="16 18 22 12 16 6"></polyline>
@@ -26,8 +26,8 @@ const enSkills = content.en.skills;
 
     <!-- Skills 3-Cards Matrix (Matching User Image 2 Template) -->
     <div class="skills-cards-grid">
-      {skillCategoriesData.map((item) => (
-        <div class="glass-card skill-card-item">
+      {skillCategoriesData.map((item, idx) => (
+        <div class={`glass-card skill-card-item reveal-on-scroll reveal-scale-up delay-${(idx + 1) * 150}`}>
           <!-- Top Icon Box (Image 2 Style) -->
           <div class="skill-icon-box">
             {item.icon === 'ai' && (

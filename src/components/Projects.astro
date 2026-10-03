@@ -7,7 +7,7 @@ const enProjects = content.en.projects;
 <section id="projects" class="projects-section section-secondary transition-colors duration-300">
   <div class="container">
     <!-- Section Header -->
-    <div class="section-header">
+    <div class="section-header reveal-on-scroll">
       <span class="section-tag" data-i18n-id={projects.sectionTag} data-i18n-en={enProjects.sectionTag}>
         <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
@@ -27,8 +27,8 @@ const enProjects = content.en.projects;
 
     <!-- Clean Projects Grid (Title Only, No Categories, No Labels, Separator Line, Logos on Tools) -->
     <div class="projects-grid">
-      {projectsData.map((project) => (
-        <div class="glass-card project-card">
+      {projectsData.map((project, idx) => (
+        <div class={`glass-card project-card reveal-on-scroll reveal-scale-up delay-${((idx % 4) + 1) * 100}`}>
           <!-- Top Media Preview -->
           <div class="project-media">
             <img 

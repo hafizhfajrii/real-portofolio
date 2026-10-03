@@ -9,7 +9,7 @@ const currentYear = new Date().getFullYear();
   <div class="container footer-container">
     <div class="footer-main-grid">
       <!-- 1. Left Column: Brand & Multi-line Tagline -->
-      <div class="footer-brand-col">
+      <div class="footer-brand-col reveal-on-scroll reveal-from-left">
         <a href="#about" class="footer-brand-logo" aria-label="hafizh.dev">
           <span class="brand-text">Hafizh</span><span class="brand-dot">.dev</span>
         </a>
@@ -27,7 +27,7 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <!-- 2. Center Column: 1-Column Vertical Navbar Links -->
-      <nav class="footer-nav-col" aria-label="Navigasi Footer">
+      <nav class="footer-nav-col reveal-on-scroll delay-150" aria-label="Navigasi Footer">
         <ul class="footer-nav-single-col">
           {navItems.map((item) => (
             <li>
@@ -45,7 +45,7 @@ const currentYear = new Date().getFullYear();
       </nav>
 
       <!-- 3. Right Column: Social Icons & Copyright -->
-      <div class="footer-right-col">
+      <div class="footer-right-col reveal-on-scroll delay-250">
         <div class="footer-social-row">
           <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="GitHub">
             <svg viewBox="0 0 24 24" width="17" height="17" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -91,7 +91,7 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <!-- 4. Far Right: Circular Back to Top Button -->
-      <div class="footer-action-col">
+      <div class="footer-action-col reveal-on-scroll delay-350">
         <button id="back-to-top" class="circle-back-top-btn" aria-label="Kembali ke Atas" title="Kembali ke Atas">
           <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <line x1="12" y1="19" x2="12" y2="5"></line>

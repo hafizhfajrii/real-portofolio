@@ -14,7 +14,7 @@ const enJourney = content.en.journey;
     <div class="container hero-container">
       <div class="hero-dual-grid">
         <!-- Left Column: Interactive Hanging Theme Toggle Lamp & Spotlight Stage -->
-        <div class="hero-visual-col">
+        <div class="hero-visual-col hero-anim-visual">
           <div class="hero-spotlight-scene">
             <!-- Hanging Cyber Lamp / Theme Toggle (Click to Switch Dark/Light Mode) -->
             <button 
@@ -72,7 +72,7 @@ const enJourney = content.en.journey;
         <!-- Right Column: Terminal Greeting, Name Headline, Glowing Role Badge & Bio Tagline -->
         <div class="hero-text-col">
           <!-- 1. Sleek Minimal Greeting (Hello! I'm) -->
-          <div class="hero-greeting-badge">
+          <div class="hero-greeting-badge hero-anim-greeting">
             <span class="greeting-terminal-symbol" aria-hidden="true">&gt;</span>
             <span 
               class="greeting-text"
@@ -85,12 +85,12 @@ const enJourney = content.en.journey;
           </div>
 
           <!-- 2. Massive Name Headline -->
-          <h1 class="hero-name-headline">
+          <h1 class="hero-name-headline hero-anim-name">
             <span class="hero-name-gradient">{heroAbout.name}</span>
           </h1>
 
           <!-- 3. Dynamic Typing Roles with Vertical Pill & Code Symbol (Matching Reference Image) -->
-          <div class="hero-role-terminal-row">
+          <div class="hero-role-terminal-row hero-anim-role">
             <!-- Vertical Capsule Indicator Bar -->
             <span class="role-vertical-bar" aria-hidden="true"></span>
 
@@ -117,7 +117,7 @@ const enJourney = content.en.journey;
 
           <!-- 4. Bio / Tagline Paragraph (Focused on Web Development with AI & Data) -->
           <p 
-            class="hero-tagline-text"
+            class="hero-tagline-text hero-anim-tagline"
             data-i18n-id={heroAbout.tagline}
             data-i18n-en={enData.tagline}
           >
@@ -127,7 +127,7 @@ const enJourney = content.en.journey;
       </div>
 
       <!-- Centered Bottom Scroll Down Indicator (Matching Reference Image) -->
-      <div class="hero-bottom-scroll-wrapper">
+      <div class="hero-bottom-scroll-wrapper hero-anim-scroll">
         <a href="#about" class="hero-scroll-circle-btn" aria-label="Scroll ke Detail Tentang">
           <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -151,7 +151,7 @@ const enJourney = content.en.journey;
          2. INTEGRATED DETAIL ABOUT & STATS SUBSECTION
          ======================================================== -->
     <div id="about-detail" class="about-detail-wrapper">
-      <div class="section-divider">
+      <div class="section-divider reveal-on-scroll">
         <span class="divider-line"></span>
         <span class="divider-badge" data-i18n-id={heroAbout.sectionTag} data-i18n-en={enData.sectionTag}>
           {heroAbout.sectionTag}
@@ -161,7 +161,7 @@ const enJourney = content.en.journey;
 
       <div class="about-grid">
         <!-- Bio Card -->
-        <div class="glass-card about-bio-card">
+        <div class="glass-card about-bio-card reveal-on-scroll reveal-from-left">
           <div class="bio-header">
             <div class="bio-location-badge">
               <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -221,7 +221,7 @@ const enJourney = content.en.journey;
         <!-- Stats Column -->
         <div class="stats-column">
           {stats.map((stat, idx) => (
-            <div class="glass-card stat-card">
+            <div class={`glass-card stat-card reveal-on-scroll reveal-from-right delay-${(idx + 1) * 100}`}>
               <div class="stat-number-wrapper">
                 <span class="stat-number">{stat.number}</span>
                 <div class="stat-glow"></div>
@@ -238,7 +238,7 @@ const enJourney = content.en.journey;
          3. INTEGRATED JOURNEY & EXPERIENCE TIMELINE (DARK PURPLE TECH)
          ======================================================== -->
     <div class="journey-timeline-section">
-      <div class="journey-header">
+      <div class="journey-header reveal-on-scroll">
         <h3 class="journey-title" data-i18n-id={journey.title} data-i18n-en={enJourney.title}>
           {journey.title}
         </h3>
@@ -257,7 +257,7 @@ const enJourney = content.en.journey;
           {journeyTimeline.map((item, idx) => {
             const isLeft = idx % 2 === 0;
             return (
-              <div class={`timeline-row ${isLeft ? 'row-left' : 'row-right'}`}>
+              <div class={`timeline-row ${isLeft ? 'row-left reveal-from-left' : 'row-right reveal-from-right'} reveal-on-scroll delay-${((idx % 3) + 1) * 100}`}>
                 <!-- Central Target Node (Uniform, Glowing Neural Core) -->
                 <div class="timeline-node">
                   <div class="node-aura"></div>
