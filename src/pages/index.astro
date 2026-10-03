@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import AboutHero from '../components/AboutHero.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <!-- Top Glass Compact Navigation Bar (Hafizh.dev) -->
+  <Navbar />
+
+  <!-- Main Unified Sections -->
+  <main id="main-content">
+    <!-- Merged Hero, About Me & Alternating Experience Timeline (id="about") -->
+    <AboutHero />
+
+    <!-- Fading Neon Divider Line (About to Skills) -->
+    <div class="fading-neon-divider" aria-hidden="true"></div>
+
+    <!-- Technical Skills Matrix (id="skills") -->
+    <Skills />
+
+    <!-- Fading Neon Divider Line (Skills to Projects) -->
+    <div class="fading-neon-divider" aria-hidden="true"></div>
+
+    <!-- Projects & Case Studies (id="projects") -->
+    <Projects />
+
+    <!-- Fading Neon Divider Line (Projects to Contact) -->
+    <div class="fading-neon-divider" aria-hidden="true"></div>
+
+    <!-- Direct Contact Hub (id="contact") -->
+    <Contact />
+  </main>
+
+  <!-- Fading Neon Divider Line (Contact to Footer) -->
+  <div class="fading-neon-divider" aria-hidden="true"></div>
+
+  <!-- Modern Glass Footer -->
+  <Footer />
+</Layout>

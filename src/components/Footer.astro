@@ -1,0 +1,379 @@
+---
+import { content, socialLinks, navItems } from '../data/portfolio';
+const { footer } = content.id;
+const enFooter = content.en.footer;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer-wrapper section-secondary">
+  <div class="container footer-container">
+    <div class="footer-main-grid">
+      <!-- 1. Left Column: Brand & Multi-line Tagline -->
+      <div class="footer-brand-col">
+        <a href="#about" class="footer-brand-logo" aria-label="hafizh.dev">
+          <span class="brand-text">Hafizh</span><span class="brand-dot">.dev</span>
+        </a>
+        <div class="footer-tagline-multiline">
+          <p class="tagline-primary" data-i18n-id={footer.taglineLine1} data-i18n-en={enFooter.taglineLine1}>
+            {footer.taglineLine1}
+          </p>
+          <p class="tagline-primary" data-i18n-id={footer.taglineLine2} data-i18n-en={enFooter.taglineLine2}>
+            {footer.taglineLine2}
+          </p>
+          <p class="tagline-sub" data-i18n-id={footer.taglineSub} data-i18n-en={enFooter.taglineSub}>
+            {footer.taglineSub}
+          </p>
+        </div>
+      </div>
+
+      <!-- 2. Center Column: 1-Column Vertical Navbar Links -->
+      <nav class="footer-nav-col" aria-label="Navigasi Footer">
+        <ul class="footer-nav-single-col">
+          {navItems.map((item) => (
+            <li>
+              <a 
+                href={item.href} 
+                class="footer-nav-link"
+                data-i18n-id={item.idLabel}
+                data-i18n-en={item.enLabel}
+              >
+                {item.idLabel}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <!-- 3. Right Column: Social Icons & Copyright -->
+      <div class="footer-right-col">
+        <div class="footer-social-row">
+          <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" width="17" height="17" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+          </a>
+
+          <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" width="17" height="17" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+
+          <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="17" height="17" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+
+          <a href={`mailto:${socialLinks.email}`} class="footer-social-btn" aria-label="Email">
+            <svg viewBox="0 0 24 24" width="17" height="17" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <div class="footer-meta-text">
+          <p class="designed-by-label" data-i18n-id={footer.designedBy} data-i18n-en={enFooter.designedBy}>
+            {footer.designedBy}
+          </p>
+          <p class="author-name" data-i18n-id={footer.authorName} data-i18n-en={enFooter.authorName}>
+            {footer.authorName}
+          </p>
+          <p class="copyright-year" data-i18n-id={footer.copyright} data-i18n-en={enFooter.copyright}>
+            {footer.copyright}
+          </p>
+        </div>
+      </div>
+
+      <!-- 4. Far Right: Circular Back to Top Button -->
+      <div class="footer-action-col">
+        <button id="back-to-top" class="circle-back-top-btn" aria-label="Kembali ke Atas" title="Kembali ke Atas">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const backToTopBtn = document.getElementById('back-to-top');
+  backToTopBtn?.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+</script>
+
+<style>
+  .footer-wrapper {
+    padding: 3.5rem 0 3rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .footer-main-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.2fr auto;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  /* 1. Left Brand & Multi-line text */
+  .footer-brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    max-width: 380px;
+  }
+
+  .footer-brand-logo {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .brand-text {
+    color: var(--text-primary);
+    font-weight: 800;
+  }
+
+  .brand-dot {
+    color: var(--accent-purple-light);
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .footer-tagline-multiline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .tagline-primary {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  .tagline-sub {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin-top: 0.25rem;
+  }
+
+  /* 2. Center 1-Column Nav (Centered) */
+  .footer-nav-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .footer-nav-single-col {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: var(--transition-smooth);
+    display: inline-block;
+  }
+
+  .footer-nav-link:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  :global(html[data-theme='light']) .footer-nav-link {
+    color: #52525b;
+  }
+
+  :global(html[data-theme='light']) .footer-nav-link:hover {
+    color: #6d28d9;
+  }
+
+  /* 3. Right Column */
+  .footer-right-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.85rem;
+    text-align: right;
+  }
+
+  .footer-social-row {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .footer-social-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(168, 85, 247, 0.18);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+  }
+
+  .footer-social-btn:hover {
+    color: #ffffff;
+    background: rgba(147, 51, 234, 0.25);
+    border-color: rgba(192, 132, 252, 0.45);
+    transform: translateY(-2px);
+  }
+
+  :global(html[data-theme='light']) .footer-social-btn {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    color: #52525b;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  }
+
+  :global(html[data-theme='light']) .footer-social-btn:hover {
+    background: #7c3aed;
+    border-color: #6d28d9;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  }
+
+  .footer-meta-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .designed-by-label {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  :global(html[data-theme='light']) .designed-by-label {
+    color: #71717a;
+  }
+
+  .author-name {
+    font-size: 0.92rem;
+    color: #f1f5f9;
+    font-weight: 700;
+  }
+
+  :global(html[data-theme='light']) .author-name {
+    color: #18181b;
+  }
+
+  .copyright-year {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    font-family: var(--font-mono);
+  }
+
+  :global(html[data-theme='light']) .copyright-year {
+    color: #71717a;
+  }
+
+  /* 4. Circular Back to Top Button */
+  .circle-back-top-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+  }
+
+  .circle-back-top-btn:hover {
+    color: #ffffff;
+    background: rgba(147, 51, 234, 0.25);
+    border-color: var(--accent-purple-light);
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px rgba(168, 85, 247, 0.4);
+  }
+
+  :global(html[data-theme='light']) .circle-back-top-btn {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    color: #52525b;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  :global(html[data-theme='light']) .circle-back-top-btn:hover {
+    background: #7c3aed;
+    border-color: #6d28d9;
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.35);
+  }
+
+  /* Responsive Centering */
+  @media (max-width: 992px) {
+    .footer-main-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2.25rem;
+    }
+
+    .footer-brand-col {
+      align-items: center;
+      text-align: center;
+      max-width: 100%;
+    }
+
+    .footer-nav-col {
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .footer-right-col {
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .footer-action-col {
+      align-self: center;
+    }
+  }
+</style>

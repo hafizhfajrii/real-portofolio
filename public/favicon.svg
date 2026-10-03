@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <!-- Clean Obsidian Pitch Black Circle Background -->
+  <circle cx="64" cy="64" r="64" fill="#030106"/>
+  
+  <!-- Stylized Letter H with Dark Purple Tech Gradient (White -> Lilac -> Luminous Violet -> Royal Purple) -->
+  <path d="M44 38V90" stroke="url(#purple_tech_grad)" stroke-width="11" stroke-linecap="round"/>
+  <path d="M84 38V90" stroke="url(#purple_tech_grad)" stroke-width="11" stroke-linecap="round"/>
+  <path d="M44 64H84" stroke="url(#purple_tech_grad)" stroke-width="11" stroke-linecap="round"/>
+  
+  <defs>
+    <linearGradient id="purple_tech_grad" x1="44" y1="38" x2="84" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#E9D5FF"/>
+      <stop offset="65%" stop-color="#C084FC"/>
+      <stop offset="100%" stop-color="#9333EA"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,1611 @@
+---
+import { content, resumeUrl, journeyTimeline, avatarUrl, socialLinks } from '../data/portfolio';
+const { heroAbout, stats, journey } = content.id;
+const enData = content.en.heroAbout;
+const enStats = content.en.stats;
+const enJourney = content.en.journey;
+---
+
+<section id="hero" class="hero-section section-primary transition-colors duration-300">
+  <!-- ========================================================
+       1. HERO CINEMATIC STAGE (Theme Toggle Lamp + Frameless Dramatic B&W Portrait)
+       ======================================================== -->
+  <div class="hero-cinematic-stage">
+    <div class="container hero-container">
+      <div class="hero-dual-grid">
+        <!-- Left Column: Interactive Hanging Theme Toggle Lamp & Spotlight Stage -->
+        <div class="hero-visual-col">
+          <div class="hero-spotlight-scene">
+            <!-- Hanging Cyber Lamp / Theme Toggle (Click to Switch Dark/Light Mode) -->
+            <button 
+              id="hero-theme-toggle" 
+              class="cyber-lamp-fixture" 
+              type="button" 
+              aria-label="Ganti Tema (Dark / Light Mode)" 
+              title="Klik lampu untuk beralih mode Dark / Light"
+            >
+              <!-- Metallic Wire Cord -->
+              <div class="lamp-cord"></div>
+              <!-- Lamp Socket -->
+              <div class="lamp-socket"></div>
+              <!-- Glowing Bulb with Filament -->
+              <div class="lamp-bulb">
+                <div class="bulb-glass"></div>
+                <div class="bulb-filament"></div>
+                <div class="bulb-halo"></div>
+              </div>
+
+              <!-- Thin Circular Arc Text (Matching Reference "Light Mode / Dark Mode") -->
+              <svg class="lamp-circular-arc-svg" viewBox="0 0 160 160" aria-hidden="true">
+                <path id="bulb-arc" d="M 32,86 A 48,48 0 1,0 128,86" fill="none" />
+                <text>
+                  <textPath href="#bulb-arc" startOffset="50%" text-anchor="middle" class="arc-text-path" id="lamp-mode-text">
+                    Light Mode
+                  </textPath>
+                </text>
+              </svg>
+
+              <!-- Conical Light Beam (Downward Spotlight) -->
+              <div class="lamp-light-beam"></div>
+            </button>
+
+            <!-- Frameless Dramatic B&W Portrait Stage (Seamless 2D Multi-Directional Feather Mask) -->
+            <div class="portrait-stage-wrapper" id="portrait-stage">
+              <!-- Ambient Soft Purple Glow Bloom behind Portrait -->
+              <div class="portrait-ambient-glow" aria-hidden="true"></div>
+              
+              <!-- Frameless Masked Photo Container (Smooth Feathering for Left & Bottom Crops) -->
+              <div class="portrait-image-mask-container">
+                <img 
+                  src={avatarUrl} 
+                  alt={`Foto Profil ${heroAbout.name}`} 
+                  class="portrait-photo-bw" 
+                  loading="eager" 
+                  decoding="async"
+                  onerror="this.onerror=null; this.src='/favicon.svg';"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Terminal Greeting, Name Headline, Glowing Role Badge & Bio Tagline -->
+        <div class="hero-text-col">
+          <!-- 1. Sleek Minimal Greeting (Hello! I'm) -->
+          <div class="hero-greeting-badge">
+            <span class="greeting-terminal-symbol" aria-hidden="true">&gt;</span>
+            <span 
+              class="greeting-text"
+              data-i18n-id="Hello! I'm"
+              data-i18n-en="Hello! I'm"
+            >
+              Hello! I'm
+            </span>
+            <span class="greeting-cursor-dot" aria-hidden="true"></span>
+          </div>
+
+          <!-- 2. Massive Name Headline -->
+          <h1 class="hero-name-headline">
+            <span class="hero-name-gradient">{heroAbout.name}</span>
+          </h1>
+
+          <!-- 3. Dynamic Typing Roles with Vertical Pill & Code Symbol (Matching Reference Image) -->
+          <div class="hero-role-terminal-row">
+            <!-- Vertical Capsule Indicator Bar -->
+            <span class="role-vertical-bar" aria-hidden="true"></span>
+
+            <!-- Standalone Code Symbol </> -->
+            <span class="role-code-symbol" aria-hidden="true">
+              <span class="code-bracket">&lt;</span>
+              <span class="code-slash">/</span>
+              <span class="code-bracket">&gt;</span>
+            </span>
+
+            <!-- Dynamic Typing Text Wrapper -->
+            <div class="role-typewriter-wrapper">
+              <span 
+                id="typewriter-text" 
+                class="role-typewriter-text" 
+                data-roles-id={JSON.stringify(heroAbout.typingRoles)}
+                data-roles-en={JSON.stringify(enData.typingRoles)}
+              >
+                {heroAbout.typingRoles[0]}
+              </span>
+              <span class="typewriter-cursor">|</span>
+            </div>
+          </div>
+
+          <!-- 4. Bio / Tagline Paragraph (Focused on Web Development with AI & Data) -->
+          <p 
+            class="hero-tagline-text"
+            data-i18n-id={heroAbout.tagline}
+            data-i18n-en={enData.tagline}
+          >
+            {heroAbout.tagline}
+          </p>
+        </div>
+      </div>
+
+      <!-- Centered Bottom Scroll Down Indicator (Matching Reference Image) -->
+      <div class="hero-bottom-scroll-wrapper">
+        <a href="#about" class="hero-scroll-circle-btn" aria-label="Scroll ke Detail Tentang">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <polyline points="19 12 12 19 5 12"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Fading Neon Divider Line (Hero to About Transition) -->
+<div class="fading-neon-divider" aria-hidden="true"></div>
+
+<!-- ========================================================
+     2. TENTANG SAYA & PERJALANAN (Subtle Neutral-900 / Clean Zinc-50)
+     ======================================================== -->
+<section id="about" class="about-section section-secondary transition-colors duration-300">
+  <div class="container">
+    <!-- ========================================================
+         2. INTEGRATED DETAIL ABOUT & STATS SUBSECTION
+         ======================================================== -->
+    <div id="about-detail" class="about-detail-wrapper">
+      <div class="section-divider">
+        <span class="divider-line"></span>
+        <span class="divider-badge" data-i18n-id={heroAbout.sectionTag} data-i18n-en={enData.sectionTag}>
+          {heroAbout.sectionTag}
+        </span>
+        <span class="divider-line"></span>
+      </div>
+
+      <div class="about-grid">
+        <!-- Bio Card -->
+        <div class="glass-card about-bio-card">
+          <div class="bio-header">
+            <div class="bio-location-badge">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span data-i18n-id={heroAbout.location} data-i18n-en={enData.location}>{heroAbout.location}</span>
+            </div>
+            <span class="bio-status-badge" data-i18n-id={heroAbout.availableStatus} data-i18n-en={enData.availableStatus}>
+              {heroAbout.availableStatus}
+            </span>
+          </div>
+
+          <div class="bio-paragraphs">
+            {heroAbout.detailedAbout.map((para, idx) => (
+              <p data-i18n-id={para} data-i18n-en={enData.detailedAbout[idx]}>
+                {para}
+              </p>
+            ))}
+          </div>
+
+          <!-- Highlights Grid -->
+          <div class="highlights-grid">
+            {heroAbout.highlights.map((item, idx) => (
+              <div class="highlight-item">
+                <span class="highlight-icon">{item.icon}</span>
+                <div class="highlight-text">
+                  <h4 data-i18n-id={item.title} data-i18n-en={enData.highlights[idx].title}>{item.title}</h4>
+                  <p data-i18n-id={item.desc} data-i18n-en={enData.highlights[idx].desc}>{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- Actions Bar (CV Download & Copy Email) -->
+          <div class="about-actions">
+            <a href={resumeUrl} class="btn btn-emerald-pill">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              <span data-i18n-id={heroAbout.downloadCv} data-i18n-en={enData.downloadCv}>{heroAbout.downloadCv}</span>
+            </a>
+
+            <button id="about-copy-email-btn" class="btn btn-secondary" data-email={socialLinks.email}>
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span data-i18n-id={heroAbout.copyEmail} data-i18n-en={enData.copyEmail}>{heroAbout.copyEmail}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats Column -->
+        <div class="stats-column">
+          {stats.map((stat, idx) => (
+            <div class="glass-card stat-card">
+              <div class="stat-number-wrapper">
+                <span class="stat-number">{stat.number}</span>
+                <div class="stat-glow"></div>
+              </div>
+              <h3 class="stat-label" data-i18n-id={stat.label} data-i18n-en={enStats[idx].label}>{stat.label}</h3>
+              <p class="stat-sublabel" data-i18n-id={stat.sublabel} data-i18n-en={enStats[idx].sublabel}>{stat.sublabel}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         3. INTEGRATED JOURNEY & EXPERIENCE TIMELINE (DARK PURPLE TECH)
+         ======================================================== -->
+    <div class="journey-timeline-section">
+      <div class="journey-header">
+        <h3 class="journey-title" data-i18n-id={journey.title} data-i18n-en={enJourney.title}>
+          {journey.title}
+        </h3>
+        <p class="journey-subtitle" data-i18n-id={journey.subtitle} data-i18n-en={enJourney.subtitle}>
+          {journey.subtitle}
+        </p>
+      </div>
+
+      <!-- Alternating Central Timeline Tree (Futuristic Neural Data Spine) -->
+      <div class="timeline-container">
+        <!-- Central Vertical Multi-Layer Neural Spine -->
+        <div class="timeline-spine-glow" aria-hidden="true"></div>
+        <div class="timeline-spine" aria-hidden="true"></div>
+
+        <div class="timeline-entries">
+          {journeyTimeline.map((item, idx) => {
+            const isLeft = idx % 2 === 0;
+            return (
+              <div class={`timeline-row ${isLeft ? 'row-left' : 'row-right'}`}>
+                <!-- Central Target Node (Uniform, Glowing Neural Core) -->
+                <div class="timeline-node">
+                  <div class="node-aura"></div>
+                  <div class="node-inner"></div>
+                </div>
+
+                <!-- Timeline Card (Clean Rounded Glass Card) -->
+                <div class="timeline-card-box">
+                  <!-- Header Badges -->
+                  <div class="card-top-badges">
+                    <span class="period-pill">{item.period}</span>
+                    <span 
+                      class="location-badge"
+                      data-i18n-id={item.locationType.id}
+                      data-i18n-en={item.locationType.en}
+                    >
+                      📍 {item.locationType.id}
+                    </span>
+                  </div>
+
+                  <!-- Title & Subtitle -->
+                  <h4 
+                    class="card-title"
+                    data-i18n-id={item.title.id}
+                    data-i18n-en={item.title.en}
+                  >
+                    {item.title.id}
+                  </h4>
+                  <h5 
+                    class="card-subtitle"
+                    data-i18n-id={item.subtitle.id}
+                    data-i18n-en={item.subtitle.en}
+                  >
+                    {item.subtitle.id}
+                  </h5>
+
+                  <!-- Description -->
+                  <p 
+                    class="card-description"
+                    data-i18n-id={item.description.id}
+                    data-i18n-en={item.description.en}
+                  >
+                    {item.description.id}
+                  </p>
+
+                  <!-- Mini Tag Pills -->
+                  <div class="card-tags">
+                    {item.tags.map(tag => (
+                      <span class="mini-tag-pill">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ==========================================================
+  // ⚡ DYNAMIC MULTI-ROLE TYPEWRITER ENGINE (3 ROLES)
+  // ==========================================================
+  const textEl = document.getElementById('typewriter-text');
+  if (textEl) {
+    let roleIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    let typingSpeed = 90;
+
+    const defaultRoles = [
+      "Web Developer",
+      "AI Engineer",
+      "Data Scientist"
+    ];
+
+    function getRoles(): string[] {
+      const lang = document.documentElement.getAttribute('lang') || 'id';
+      const attr = lang === 'en' ? 'data-roles-en' : 'data-roles-id';
+      try {
+        const parsed = JSON.parse(textEl?.getAttribute(attr) || '[]');
+        return parsed.length > 0 ? parsed : defaultRoles;
+      } catch (e) {
+        return defaultRoles;
+      }
+    }
+
+    function type() {
+      const roles = getRoles();
+      const currentRole = roles[roleIdx % roles.length];
+
+      if (isDeleting) {
+        textEl.textContent = currentRole.substring(0, charIdx - 1);
+        charIdx--;
+        typingSpeed = 40;
+      } else {
+        textEl.textContent = currentRole.substring(0, charIdx + 1);
+        charIdx++;
+        typingSpeed = 85;
+      }
+
+      if (!isDeleting && charIdx === currentRole.length) {
+        isDeleting = true;
+        typingSpeed = 2400; // Pause when role is fully typed
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        roleIdx = (roleIdx + 1) % roles.length;
+        typingSpeed = 350; // Pause before typing next role
+      }
+
+      setTimeout(type, typingSpeed);
+    }
+
+    setTimeout(type, 600);
+  }
+
+  // ==========================================================
+  // 💡 INTERACTIVE HANGING LAMP THEME TOGGLE
+  // ==========================================================
+  const lampBtn = document.getElementById('hero-theme-toggle');
+  lampBtn?.addEventListener('click', () => {
+    lampBtn.classList.add('lamp-clicked');
+    setTimeout(() => lampBtn.classList.remove('lamp-clicked'), 600);
+    
+    // @ts-ignore
+    if (typeof window.toggleTheme === 'function') {
+      // @ts-ignore
+      window.toggleTheme();
+    }
+  });
+
+  // Sync initial arc text on load
+  const initialTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  const lampArcText = document.getElementById('lamp-mode-text');
+  if (lampArcText) {
+    lampArcText.textContent = initialTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+  }
+
+  // Copy Email Handlers
+  function setupCopyEmail(btnId: string) {
+    const btn = document.getElementById(btnId);
+    btn?.addEventListener('click', () => {
+      const email = btn.getAttribute('data-email');
+      if (email) {
+        navigator.clipboard.writeText(email).then(() => {
+          const lang = document.documentElement.getAttribute('lang') || 'id';
+          const msg = lang === 'en' 
+            ? `Email (${email}) copied to clipboard!`
+            : `Email (${email}) berhasil disalin ke clipboard!`;
+          // @ts-ignore
+          if (typeof window.showToast === 'function') {
+            // @ts-ignore
+            window.showToast(msg, 'success');
+          }
+        });
+      }
+    });
+  }
+
+  setupCopyEmail('about-copy-email-btn');
+</script>
+
+<style>
+  .hero-section {
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+  }
+
+  .about-section {
+    padding-top: 5rem;
+    padding-bottom: 5.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ========================================================
+     1. HERO CINEMATIC STAGE (Theme Toggle Lamp + Frameless 2/3 Face Portrait)
+     ======================================================== */
+  .hero-cinematic-stage {
+    min-height: calc(100vh - 90px);
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 2.5rem 0 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-dual-grid {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 3.5rem;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Left Column: Visual & Cyber Pendant Lamp Scene */
+  .hero-visual-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .hero-spotlight-scene {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  /* ========================================================
+     💡 CYBER PENDANT LAMP (INTERACTIVE THEME TOGGLE)
+     ======================================================== */
+  .cyber-lamp-fixture {
+    position: absolute;
+    top: -30px;
+    right: 55px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .cyber-lamp-fixture:hover {
+    transform: translateY(4px) scale(1.06);
+  }
+
+  .cyber-lamp-fixture.lamp-clicked {
+    transform: translateY(8px) scale(0.96);
+  }
+
+  .lamp-cord {
+    width: 2px;
+    height: 65px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, #c084fc 60%, #9333ea 100%);
+    box-shadow: 0 0 8px rgba(192, 132, 252, 0.6);
+  }
+
+  .lamp-socket {
+    width: 15px;
+    height: 10px;
+    background: #2e1065;
+    border: 1px solid #c084fc;
+    border-radius: 3px 3px 1px 1px;
+    box-shadow: 0 0 8px rgba(147, 51, 234, 0.4);
+  }
+
+  .lamp-bulb {
+    position: relative;
+    width: 34px;
+    height: 42px;
+    background: radial-gradient(circle at 50% 40%, #ffffff 15%, #f3e8ff 55%, #c084fc 85%, #9333ea 100%);
+    border-radius: 50% 50% 42% 42%;
+    box-shadow: 
+      0 0 25px rgba(255, 255, 255, 0.95),
+      0 0 55px rgba(192, 132, 252, 0.85),
+      0 0 90px rgba(147, 51, 234, 0.7);
+    animation: bulbGlowPulse 4s ease-in-out infinite alternate;
+    transition: all 0.4s ease;
+  }
+
+  /* Light mode bulb appearance */
+  :global(html[data-theme='light']) .lamp-bulb {
+    background: radial-gradient(circle at 50% 40%, #ffffff 20%, #faf5ff 60%, #a855f7 90%, #7e22ce 100%);
+    box-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.9),
+      0 0 40px rgba(147, 51, 234, 0.5),
+      0 0 65px rgba(126, 34, 206, 0.35);
+  }
+
+  .bulb-glass {
+    position: absolute;
+    top: 5px;
+    left: 8px;
+    width: 8px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    filter: blur(1px);
+  }
+
+  .bulb-filament {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 11px;
+    height: 13px;
+    border: 1.5px solid #ffffff;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 0 8px #ffffff;
+  }
+
+  /* Circular Arc SVG Text around the Bulb (Matching Image 1) */
+  .lamp-circular-arc-svg {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 140px;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  .arc-text-path {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    fill: #ffffff;
+    letter-spacing: 0.14em;
+    text-shadow: 0 0 8px rgba(192, 132, 252, 0.8), 0 0 16px rgba(147, 51, 234, 0.5);
+    transition: fill 0.3s ease;
+  }
+
+  :global(html[data-theme='light']) .arc-text-path {
+    fill: #581c87;
+    text-shadow: 0 0 10px rgba(147, 51, 234, 0.3);
+  }
+
+  /* Conical Spotlight Downward Beam */
+  .lamp-light-beam {
+    position: absolute;
+    top: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 340px;
+    height: 400px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(216, 180, 254, 0.24) 0%, rgba(147, 51, 234, 0.08) 50%, transparent 75%);
+    clip-path: polygon(45% 0%, 55% 0%, 100% 100%, 0% 100%);
+    pointer-events: none;
+    filter: blur(10px);
+    z-index: 1;
+    opacity: 0.85;
+  }
+
+  :global(html[data-theme='light']) .lamp-light-beam {
+    background: radial-gradient(ellipse at 50% 0%, rgba(168, 85, 247, 0.18) 0%, rgba(126, 34, 206, 0.05) 50%, transparent 75%);
+  }
+
+  @keyframes bulbGlowPulse {
+    0% {
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.85), 0 0 45px rgba(192, 132, 252, 0.75), 0 0 70px rgba(147, 51, 234, 0.5);
+    }
+    100% {
+      box-shadow: 0 0 32px rgba(255, 255, 255, 1), 0 0 68px rgba(192, 132, 252, 0.95), 0 0 110px rgba(147, 51, 234, 0.8);
+    }
+  }
+
+  /* ========================================================
+     👤 DRAMATIC B&W PORTRAIT STAGE (SEAMLESS 2D FEATHER MASK)
+     ======================================================== */
+  .portrait-stage-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    height: 480px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 2;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .portrait-stage-wrapper:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Ambient Soft Purple Glow Bloom behind Portrait */
+  .portrait-ambient-glow {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 60%, rgba(168, 85, 247, 0.28) 0%, rgba(126, 34, 206, 0.12) 45%, transparent 72%);
+    filter: blur(42px);
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 1;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .portrait-stage-wrapper:hover .portrait-ambient-glow {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.16);
+    filter: blur(50px);
+    background: radial-gradient(circle at 50% 55%, rgba(192, 132, 252, 0.38) 0%, rgba(147, 51, 234, 0.18) 50%, transparent 75%);
+  }
+
+  :global(html[data-theme='light']) .portrait-ambient-glow {
+    background: radial-gradient(circle at 50% 60%, rgba(168, 85, 247, 0.18) 0%, rgba(147, 51, 234, 0.06) 50%, transparent 72%);
+    opacity: 0.6;
+    filter: blur(36px);
+  }
+
+  :global(html[data-theme='light']) .portrait-stage-wrapper:hover .portrait-ambient-glow {
+    opacity: 0.85;
+    background: radial-gradient(circle at 50% 55%, rgba(168, 85, 247, 0.25) 0%, rgba(126, 34, 206, 0.1) 50%, transparent 75%);
+  }
+
+  /* Frameless Masked Photo Container (Smooth Feathering for Left & Bottom Crops) */
+  .portrait-image-mask-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 2;
+    overflow: hidden;
+    /* High-Fidelity 2D Intersecting Mask to feather left (first 50% transparent fade) & bottom edges seamlessly */
+    -webkit-mask-image: 
+      linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.02) 15%, rgba(0, 0, 0, 0.18) 32%, rgba(0, 0, 0, 0.55) 45%, #000000 55%, #000000 88%, rgba(0, 0, 0, 0.75) 95%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.5) 4%, #000000 12%, #000000 60%, rgba(0, 0, 0, 0.7) 75%, rgba(0, 0, 0, 0.2) 88%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: 
+      linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.02) 15%, rgba(0, 0, 0, 0.18) 32%, rgba(0, 0, 0, 0.55) 45%, #000000 55%, #000000 88%, rgba(0, 0, 0, 0.75) 95%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.5) 4%, #000000 12%, #000000 60%, rgba(0, 0, 0, 0.7) 75%, rgba(0, 0, 0, 0.2) 88%, transparent 100%);
+    mask-composite: intersect;
+  }
+
+  /* Monochrome / B&W Portrait Photo */
+  .portrait-photo-bw {
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: bottom center;
+    filter: grayscale(100%) contrast(1.18) brightness(0.96);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: bottom center;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .portrait-stage-wrapper:hover .portrait-photo-bw {
+    transform: scale(1.02);
+    filter: grayscale(100%) contrast(1.24) brightness(1.04) drop-shadow(0 0 28px rgba(168, 85, 247, 0.42));
+  }
+
+  /* Light Mode Monochrome adjustments */
+  :global(html[data-theme='light']) .portrait-photo-bw {
+    filter: grayscale(100%) contrast(1.22) brightness(0.98) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.06));
+  }
+
+  :global(html[data-theme='light']) .portrait-stage-wrapper:hover .portrait-photo-bw {
+    filter: grayscale(100%) contrast(1.28) brightness(1.02) drop-shadow(0 0 24px rgba(147, 51, 234, 0.35));
+  }
+
+  /* ========================================================
+     ✍️ RIGHT COLUMN: TERMINAL GREETING, HEADLINE & ROLE TYPOGRAPHY
+     ======================================================== */
+  .hero-text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    z-index: 3;
+  }
+
+  /* 1. Sleek Minimal Greeting (Hello! I'm) */
+  .hero-greeting-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: clamp(0.85rem, 1.4vw, 0.98rem);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #94a3b8;
+    margin-bottom: -0.35rem;
+    width: fit-content;
+  }
+
+  .greeting-terminal-symbol {
+    color: var(--accent-purple-neon);
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.7);
+  }
+
+  .greeting-text {
+    color: #cbd5e1;
+    font-weight: 500;
+  }
+
+  :global(html[data-theme='light']) .greeting-text {
+    color: #4b5563;
+  }
+
+  .greeting-cursor-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-purple-neon);
+    box-shadow: 0 0 8px var(--accent-purple-neon);
+    animation: blinkDot 1.4s infinite ease-in-out;
+  }
+
+  @keyframes blinkDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.7); }
+  }
+
+  /* 2. Massive Name Headline */
+  .hero-name-headline {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5.2vw, 4.4rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+
+  .hero-name-gradient {
+    background: var(--text-neon);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 35px rgba(168, 85, 247, 0.4);
+  }
+
+  /* 3. Hero Role Row (Balanced Font Size) */
+  .hero-role-terminal-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: var(--font-heading);
+    min-height: 2.75rem;
+    flex-wrap: wrap;
+  }
+
+  /* Vertical Gradient Capsule Pill Bar */
+  .role-vertical-bar {
+    width: 5px;
+    height: 1.65rem;
+    border-radius: var(--radius-full);
+    background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 45%, #a855f7 85%, #7e22ce 100%);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 18px rgba(168, 85, 247, 0.5);
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+
+  :global(html[data-theme='light']) .role-vertical-bar {
+    background: linear-gradient(180deg, #7c3aed 0%, #9333ea 55%, #c084fc 100%);
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
+  }
+
+  /* Sleek Standalone Code Symbol </> */
+  .role-code-symbol {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    user-select: none;
+    line-height: 1;
+    margin-right: 0.15rem;
+  }
+
+  .code-bracket {
+    color: #cbd5e1;
+    text-shadow: 0 0 12px rgba(203, 213, 225, 0.5);
+    transition: color 0.3s ease;
+  }
+
+  .code-slash {
+    color: #c084fc;
+    margin: 0 1.5px;
+    font-weight: 900;
+    text-shadow: 0 0 12px rgba(192, 132, 252, 0.75);
+    transition: color 0.3s ease;
+  }
+
+  :global(html[data-theme='light']) .code-bracket {
+    color: #64748b;
+    text-shadow: none;
+  }
+
+  :global(html[data-theme='light']) .code-slash {
+    color: #7c3aed;
+    text-shadow: none;
+  }
+
+  .role-typewriter-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .role-typewriter-text {
+    font-family: var(--font-heading);
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    text-shadow: 0 0 25px rgba(255, 255, 255, 0.18);
+  }
+
+  :global(html[data-theme='light']) .role-typewriter-text {
+    color: #18181b;
+    text-shadow: none;
+  }
+
+  .typewriter-cursor {
+    font-family: var(--font-heading);
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    color: var(--accent-purple-neon);
+    font-weight: 300;
+    line-height: 1.2;
+    animation: blinkCursor 0.8s infinite;
+  }
+
+  @keyframes blinkCursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* 4. Tagline */
+  .hero-tagline-text {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 580px;
+    margin: 0;
+  }
+
+  /* Centered Bottom Scroll Down Indicator */
+  .hero-bottom-scroll-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 3.5rem;
+    position: relative;
+    z-index: 5;
+  }
+
+  .hero-scroll-circle-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border-glass);
+    color: var(--accent-purple-light);
+    text-decoration: none;
+    box-shadow: 0 0 18px rgba(168, 85, 247, 0.35);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: scrollBounce 2.5s infinite ease-in-out;
+  }
+
+  .hero-scroll-circle-btn:hover {
+    color: #ffffff;
+    background: var(--accent-purple);
+    border-color: var(--accent-purple-neon);
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.6);
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* ========================================================
+     2. INTEGRATED DETAIL ABOUT & STATS SUBSECTION
+     ======================================================== */
+  .about-detail-wrapper {
+    scroll-margin-top: 90px;
+  }
+
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 2.5rem 0 3rem;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border-glass), transparent);
+  }
+
+  .divider-badge {
+    padding: 0.35rem 1.2rem;
+    border-radius: var(--radius-full);
+    background: rgba(147, 51, 234, 0.12);
+    border: 1px solid rgba(192, 132, 252, 0.32);
+    color: var(--accent-purple-light);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* About Grid */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 2rem;
+    align-items: stretch;
+    margin-bottom: 4.5rem;
+  }
+
+  .about-bio-card {
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  :global(html[data-theme='light']) .about-bio-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-card);
+  }
+
+  .bio-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .bio-location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--accent-purple-light);
+    font-weight: 500;
+  }
+
+  :global(html[data-theme='light']) .bio-location-badge {
+    color: #6d28d9;
+  }
+
+  .bio-status-badge {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-purple-light);
+    background: rgba(147, 51, 234, 0.12);
+    border: 1px solid rgba(192, 132, 252, 0.35);
+    padding: 0.25rem 0.85rem;
+    border-radius: var(--radius-full);
+  }
+
+  :global(html[data-theme='light']) .bio-status-badge {
+    background: rgba(124, 58, 237, 0.08);
+    border-color: rgba(124, 58, 237, 0.22);
+    color: #6d28d9;
+  }
+
+  .bio-paragraphs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: var(--text-secondary);
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+
+  :global(html[data-theme='light']) .bio-paragraphs {
+    color: #52525b;
+  }
+
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+  }
+
+  :global(html[data-theme='light']) .highlight-item {
+    background: #ffffff;
+    border-color: var(--border-subtle);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+
+  .highlight-icon {
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  .highlight-text h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+    color: var(--text-primary);
+  }
+
+  :global(html[data-theme='light']) .highlight-text h4 {
+    color: #18181b;
+  }
+
+  .highlight-text p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  :global(html[data-theme='light']) .highlight-text p {
+    color: #71717a;
+  }
+
+  .about-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+
+  /* Right Stats */
+  .stats-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .stat-card {
+    padding: 1.85rem 1.35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  :global(html[data-theme='light']) .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-card);
+  }
+
+  :global(html[data-theme='light']) .stat-card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(124, 58, 237, 0.35);
+    box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.08);
+  }
+
+  .stat-number-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-number {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1;
+    background: var(--text-neon);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .stat-glow {
+    position: absolute;
+    inset: -10px;
+    background: radial-gradient(circle, rgba(147, 51, 234, 0.22) 0%, transparent 70%);
+    filter: blur(15px);
+    z-index: -1;
+    opacity: 0.7;
+  }
+
+  :global(html[data-theme='light']) .stat-glow {
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
+  }
+
+  .stat-label {
+    font-size: 0.96rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+  }
+
+  :global(html[data-theme='light']) .stat-label {
+    color: #18181b;
+  }
+
+  .stat-sublabel {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.35;
+  }
+
+  :global(html[data-theme='light']) .stat-sublabel {
+    color: #71717a;
+  }
+
+  /* ========================================================
+     3. JOURNEY & EXPERIENCE TIMELINE (DARK PURPLE TECH)
+     ======================================================== */
+  .journey-timeline-section {
+    padding-top: 2rem;
+    position: relative;
+  }
+
+  .journey-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .journey-title {
+    font-size: clamp(1.75rem, 3vw, 2.3rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  :global(html[data-theme='light']) .journey-title {
+    color: #18181b;
+  }
+
+  .journey-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  :global(html[data-theme='light']) .journey-subtitle {
+    color: #52525b;
+  }
+
+  .timeline-container {
+    position: relative;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 1rem 0;
+  }
+
+  /* Central Vertical Multi-Layer Glowing Neural Spine */
+  .timeline-spine-glow {
+    position: absolute;
+    top: 25px;
+    bottom: 25px;
+    left: 50%;
+    width: 8px;
+    background: linear-gradient(180deg, 
+      rgba(216, 180, 254, 0) 0%, 
+      rgba(168, 85, 247, 0.55) 15%, 
+      rgba(147, 51, 234, 0.6) 50%, 
+      rgba(168, 85, 247, 0.55) 85%, 
+      rgba(216, 180, 254, 0) 100%
+    );
+    filter: blur(4px);
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+  }
+
+  :global(html[data-theme='light']) .timeline-spine-glow {
+    background: linear-gradient(180deg, rgba(124, 58, 237, 0) 0%, rgba(124, 58, 237, 0.2) 50%, rgba(124, 58, 237, 0) 100%);
+  }
+
+  .timeline-spine {
+    position: absolute;
+    top: 25px;
+    bottom: 25px;
+    left: 50%;
+    width: 2px;
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.9) 0%, 
+      #d8b4fe 15%, 
+      #9333ea 50%, 
+      #c084fc 85%, 
+      rgba(255, 255, 255, 0.9) 100%
+    );
+    background-size: 100% 200%;
+    animation: spinePulse 6s ease-in-out infinite;
+    transform: translateX(-50%);
+    border-radius: 99px;
+    box-shadow: 0 0 10px rgba(192, 132, 252, 0.8), 0 0 22px rgba(147, 51, 234, 0.45);
+    z-index: 2;
+  }
+
+  :global(html[data-theme='light']) .timeline-spine {
+    background: linear-gradient(180deg, #7c3aed 0%, #6d28d9 50%, #7c3aed 100%);
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.35);
+  }
+
+  @keyframes spinePulse {
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 0% 100%; }
+  }
+
+  .timeline-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+    position: relative;
+    z-index: 3;
+  }
+
+  .timeline-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Concentric Neural Target Nodes (Uniform, Radiant & Polished for ALL items) */
+  .timeline-node {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 32px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #07030d;
+    border: 2px solid rgba(192, 132, 252, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    box-shadow: 0 0 16px rgba(147, 51, 234, 0.5), inset 0 0 8px rgba(168, 85, 247, 0.25);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(html[data-theme='light']) .timeline-node {
+    background: #ffffff;
+    border-color: #7c3aed;
+    box-shadow: 0 0 12px rgba(124, 58, 237, 0.25);
+  }
+
+  .node-aura {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192, 132, 252, 0.35) 0%, transparent 70%);
+    opacity: 0.7;
+    animation: nodeAuraPulse 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  :global(html[data-theme='light']) .node-aura {
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, transparent 70%);
+  }
+
+  .timeline-node .node-inner {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 15%, #c084fc 65%, #9333ea 100%);
+    box-shadow: 0 0 10px #c084fc, 0 0 18px rgba(147, 51, 234, 0.85);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(html[data-theme='light']) .timeline-node .node-inner {
+    background: #7c3aed;
+    box-shadow: 0 0 8px rgba(124, 58, 237, 0.45);
+  }
+
+  @keyframes nodeAuraPulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.3); opacity: 0.9; }
+  }
+
+  /* Row Hover Effect on Node */
+  .timeline-row:hover .timeline-node {
+    transform: translate(-50%, -50%) scale(1.2);
+    border-color: #d8b4fe;
+    box-shadow: 0 0 25px rgba(216, 180, 254, 0.85), 0 0 45px rgba(147, 51, 234, 0.55), inset 0 0 12px rgba(192, 132, 252, 0.4);
+  }
+
+  .timeline-row:hover .timeline-node .node-inner {
+    transform: scale(1.2);
+    box-shadow: 0 0 16px #ffffff, 0 0 24px #d8b4fe;
+  }
+
+  /* Card Positioning (Alternating Left / Right) */
+  .row-left {
+    justify-content: flex-start;
+  }
+
+  .row-right {
+    justify-content: flex-end;
+  }
+
+  .timeline-card-box {
+    width: calc(50% - 40px);
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    padding: 1.85rem;
+    box-shadow: var(--shadow-glass);
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .timeline-card-box:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(192, 132, 252, 0.42);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.9), 0 0 22px rgba(147, 51, 234, 0.22);
+  }
+
+  :global(html[data-theme='light']) .timeline-card-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-card);
+  }
+
+  :global(html[data-theme='light']) .timeline-card-box:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(124, 58, 237, 0.35);
+    box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.08), 0 0 16px rgba(124, 58, 237, 0.08);
+  }
+
+  /* Card Content Styles */
+  .card-top-badges {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .period-pill {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    padding: 0.22rem 0.75rem;
+    border-radius: var(--radius-full);
+  }
+
+  :global(html[data-theme='light']) .period-pill {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: var(--border-subtle);
+    color: #18181b;
+  }
+
+  .location-badge {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  :global(html[data-theme='light']) .location-badge {
+    color: #71717a;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  :global(html[data-theme='light']) .card-title {
+    color: #18181b;
+  }
+
+  .card-subtitle {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--accent-purple-light);
+    margin: 0;
+  }
+
+  :global(html[data-theme='light']) .card-subtitle {
+    color: #6d28d9;
+  }
+
+  .card-description {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin: 0.2rem 0;
+  }
+
+  :global(html[data-theme='light']) .card-description {
+    color: #52525b;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.4rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .mini-tag-pill {
+    font-size: 0.76rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-full);
+  }
+
+  :global(html[data-theme='light']) .mini-tag-pill {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: var(--border-subtle);
+    color: #52525b;
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 1024px) {
+    .hero-dual-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 3rem;
+    }
+
+    .hero-text-col {
+      align-items: center;
+    }
+
+    .role-typewriter-container {
+      justify-content: center;
+    }
+
+    .hero-visual-col {
+      order: -1;
+    }
+
+    .cyber-lamp-fixture {
+      right: 20%;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-column {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      padding-top: 4.5rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .about-section {
+      padding-top: 3.5rem;
+      padding-bottom: 4.5rem;
+    }
+
+    .hero-cinematic-stage {
+      padding: 1.5rem 0 2rem;
+      min-height: auto;
+    }
+
+    .portrait-stage-wrapper {
+      max-width: 310px;
+      height: 400px;
+    }
+
+    .cyber-lamp-fixture {
+      right: 10%;
+      top: -20px;
+    }
+
+    .hero-massive-title {
+      font-size: 2.3rem;
+    }
+
+    /* Timeline Mobile Vertical Left Alignment */
+    .timeline-spine-glow,
+    .timeline-spine {
+      left: 20px;
+      transform: none;
+    }
+
+    .timeline-node {
+      left: 20px;
+      transform: translate(-50%, -50%);
+    }
+
+    .timeline-row:hover .timeline-node {
+      transform: translate(-50%, -50%) scale(1.15);
+    }
+
+    .row-left,
+    .row-right {
+      justify-content: flex-start;
+      padding-left: 48px;
+    }
+
+    .timeline-card-box {
+      width: 100%;
+    }
+
+    .highlights-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-column {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

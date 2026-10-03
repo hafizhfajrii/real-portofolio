@@ -1,0 +1,286 @@
+---
+import { content, socialLinks } from '../data/portfolio';
+const { contact } = content.id;
+const enContact = content.en.contact;
+
+// 2x2 Grid Order:
+// Kiri Atas: LinkedIn, Kanan Atas: Email Langsung
+// Kiri Bawah: GitHub, Kanan Bawah: Instagram
+const directContacts = [
+  {
+    name: 'LinkedIn',
+    value: 'Hafizh Ala\'udin Fajri',
+    href: socialLinks.linkedin,
+    icon: 'linkedin'
+  },
+  {
+    name: 'Email Langsung',
+    value: socialLinks.email,
+    href: `mailto:${socialLinks.email}`,
+    icon: 'email'
+  },
+  {
+    name: 'GitHub',
+    value: 'github.com/hafizhfajrii',
+    href: socialLinks.github,
+    icon: 'github'
+  },
+  {
+    name: 'Instagram',
+    value: '@hafizhfajrii',
+    href: socialLinks.instagram,
+    icon: 'instagram'
+  }
+];
+---
+
+<section id="contact" class="contact-section section-primary transition-colors duration-300">
+  <div class="container">
+    <!-- Section Header (Standard Pill Badge Shape with Ample Spacing) -->
+    <div class="section-header contact-header-centered">
+      <span class="section-tag contact-tag" data-i18n-id={contact.sectionTag} data-i18n-en={enContact.sectionTag}>
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>
+        {contact.sectionTag}
+      </span>
+
+      <h2 class="section-title contact-main-title">
+        <span data-i18n-id={contact.title} data-i18n-en={enContact.title}>{contact.title}</span>{' '}
+        <span class="gradient-text" data-i18n-id={contact.titleHighlight} data-i18n-en={enContact.titleHighlight}>{contact.titleHighlight}</span>
+      </h2>
+    </div>
+
+    <!-- Direct Contact Hub Cards Grid (2x2 Grid Order) -->
+    <div class="contact-hub-container">
+      <div class="contact-cards-grid">
+        {directContacts.map((item) => (
+          <a 
+            href={item.href} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="glass-card contact-channel-card"
+          >
+            <div class="channel-icon-box">
+              {item.icon === 'linkedin' && (
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              )}
+              {item.icon === 'email' && (
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              )}
+              {item.icon === 'github' && (
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+              )}
+              {item.icon === 'instagram' && (
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              )}
+            </div>
+
+            <div class="channel-info">
+              <span class="channel-name">{item.name}</span>
+              <span class="channel-value">{item.value}</span>
+            </div>
+
+            <div class="channel-arrow">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-header-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .contact-tag {
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 18px rgba(168, 85, 247, 0.2);
+  }
+
+  :global(html[data-theme='light']) .contact-tag {
+    box-shadow: 0 2px 10px rgba(124, 58, 237, 0.12);
+  }
+
+  .contact-main-title {
+    font-size: clamp(2.2rem, 4.2vw, 3.1rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .contact-hub-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contact-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .contact-channel-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem 1.75rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .contact-channel-card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(192, 132, 252, 0.45);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 35px -5px rgba(0, 0, 0, 0.9), 0 0 25px rgba(147, 51, 234, 0.25);
+  }
+
+  :global(html[data-theme='light']) .contact-channel-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-card);
+  }
+
+  :global(html[data-theme='light']) .contact-channel-card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(124, 58, 237, 0.4);
+    box-shadow: 0 14px 30px -4px rgba(124, 58, 237, 0.15);
+  }
+
+  .channel-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-purple-light);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+  }
+
+  .contact-channel-card:hover .channel-icon-box {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.3) 0%, rgba(126, 34, 206, 0.25) 100%);
+    border-color: rgba(192, 132, 252, 0.6);
+    color: #ffffff;
+    transform: scale(1.1) rotate(-3deg);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.45);
+  }
+
+  :global(html[data-theme='light']) .channel-icon-box {
+    background: rgba(124, 58, 237, 0.08);
+    border: 1px solid rgba(124, 58, 237, 0.22);
+    color: #6d28d9;
+  }
+
+  :global(html[data-theme='light']) .contact-channel-card:hover .channel-icon-box {
+    background: #7c3aed;
+    border-color: #6d28d9;
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
+  }
+
+  .channel-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+  }
+
+  .channel-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  :global(html[data-theme='light']) .channel-name {
+    color: #18181b;
+  }
+
+  .channel-value {
+    font-size: 0.9rem;
+    color: var(--accent-purple-light);
+    font-weight: 600;
+    word-break: break-all;
+  }
+
+  :global(html[data-theme='light']) .channel-value {
+    color: #6d28d9;
+  }
+
+  .channel-arrow {
+    color: var(--text-muted);
+    transition: var(--transition-smooth);
+  }
+
+  .contact-channel-card:hover .channel-arrow {
+    color: var(--accent-purple-light);
+    transform: translateX(4px);
+  }
+
+  :global(html[data-theme='light']) .channel-arrow {
+    color: #a1a1aa;
+  }
+
+  :global(html[data-theme='light']) .contact-channel-card:hover .channel-arrow {
+    color: #7c3aed;
+  }
+
+  @media (max-width: 768px) {
+    .contact-section {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .contact-cards-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-main-title {
+      font-size: 1.9rem;
+    }
+  }
+</style>

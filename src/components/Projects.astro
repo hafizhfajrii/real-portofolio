@@ -1,0 +1,379 @@
+---
+import { content, projectsData } from '../data/portfolio';
+const { projects } = content.id;
+const enProjects = content.en.projects;
+---
+
+<section id="projects" class="projects-section section-secondary transition-colors duration-300">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <span class="section-tag" data-i18n-id={projects.sectionTag} data-i18n-en={enProjects.sectionTag}>
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+        {projects.sectionTag}
+      </span>
+      <h2 class="section-title">
+        <span data-i18n-id={projects.title} data-i18n-en={enProjects.title}>{projects.title}</span>{' '}
+        <span class="gradient-text" data-i18n-id={projects.titleHighlight} data-i18n-en={enProjects.titleHighlight}>{projects.titleHighlight}</span>
+      </h2>
+      <p class="section-subtitle" data-i18n-id={projects.subtitle} data-i18n-en={enProjects.subtitle}>
+        {projects.subtitle}
+      </p>
+    </div>
+
+    <!-- Clean Projects Grid (Title Only, No Categories, No Labels, Separator Line, Logos on Tools) -->
+    <div class="projects-grid">
+      {projectsData.map((project) => (
+        <div class="glass-card project-card">
+          <!-- Top Media Preview -->
+          <div class="project-media">
+            <img 
+              src={project.image} 
+              alt={project.title} 
+              class="project-img"
+              loading="lazy"
+            />
+            <div class="media-overlay"></div>
+          </div>
+
+          <!-- Project Content Body -->
+          <div class="project-body">
+            <!-- 1. Title Only (e.g. "DataPulse BI") -->
+            <div class="project-header-info">
+              <h3 class="project-title">{project.title}</h3>
+            </div>
+
+            <!-- 2. Short Description -->
+            <p class="project-desc" data-i18n-id={project.description.id} data-i18n-en={project.description.en}>
+              {project.description.id}
+            </p>
+
+            <!-- 3. Tools with Separator Line (Batas Antara Deskripsi & Tools) -->
+            <div class="project-tools-wrapper">
+              <div class="project-tags">
+                {project.tools.map((tool) => (
+                  <div class="project-tool-pill">
+                    <span class="tool-icon">{tool.icon}</span>
+                    <span class="tool-name">{tool.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- 4. Project Action Links (Demo & Source Code Buttons) -->
+            <div class="project-actions-slot">
+              {project.liveUrl && (
+                <a 
+                  href={project.liveUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="btn-project-action btn-project-demo"
+                  title="Lihat Demo Langsung"
+                >
+                  <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                  <span data-i18n-id={projects.liveDemo} data-i18n-en={enProjects.liveDemo}>{projects.liveDemo}</span>
+                </a>
+              )}
+
+              {project.githubUrl && (
+                <a 
+                  href={project.githubUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="btn-project-action btn-project-code"
+                  title="Lihat Source Code di GitHub"
+                >
+                  <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                  <span data-i18n-id={projects.sourceCode} data-i18n-en={enProjects.sourceCode}>{projects.sourceCode}</span>
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.85rem;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .project-card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(192, 132, 252, 0.42);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.9), 0 0 25px rgba(147, 51, 234, 0.22);
+  }
+
+  :global(html[data-theme='light']) .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-card);
+  }
+
+  :global(html[data-theme='light']) .project-card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(124, 58, 237, 0.35);
+    box-shadow: 0 14px 30px -4px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Media Preview Area */
+  .project-media {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background: #05020a;
+  }
+
+  :global(html[data-theme='light']) .project-media {
+    background: #f4f4f5;
+  }
+
+  .project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .project-card:hover .project-img {
+    transform: scale(1.05);
+  }
+
+  .media-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(3, 1, 6, 0.92) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  :global(html[data-theme='light']) .media-overlay {
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.92) 0%, transparent 60%);
+  }
+
+  /* Body Content */
+  .project-body {
+    padding: 1.35rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 1rem;
+  }
+
+  .project-header-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  :global(html[data-theme='light']) .project-title {
+    color: #18181b;
+  }
+
+  .project-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  :global(html[data-theme='light']) .project-desc {
+    color: #52525b;
+  }
+
+  /* Separator Line & Tools Wrapper (Batas Antara Deskripsi & Tools) */
+  .project-tools-wrapper {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+    position: relative;
+  }
+
+  .project-tools-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 38px;
+    height: 1px;
+    background: var(--accent-purple-light);
+  }
+
+  /* Tool Tags with Logos */
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .project-tool-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(168, 85, 247, 0.15);
+    padding: 0.28rem 0.7rem;
+    border-radius: var(--radius-full);
+    transition: var(--transition-smooth);
+  }
+
+  .project-tool-pill:hover {
+    background: rgba(147, 51, 234, 0.15);
+    border-color: rgba(192, 132, 252, 0.35);
+    transform: translateY(-1px);
+  }
+
+  :global(html[data-theme='light']) .project-tool-pill {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  }
+
+  :global(html[data-theme='light']) .project-tool-pill:hover {
+    background: rgba(124, 58, 237, 0.06);
+    border-color: rgba(124, 58, 237, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .tool-icon {
+    font-size: 0.88rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .tool-name {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: 0.01em;
+  }
+
+  :global(html[data-theme='light']) .tool-name {
+    color: #18181b;
+  }
+
+  /* Project Actions Slot (Demo & Code Buttons) */
+  .project-actions-slot {
+    display: flex;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .btn-project-action {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.95rem;
+    font-size: 0.84rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Demo Button (Modern Purple Tech Gradient Pill) */
+  .btn-project-demo {
+    background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%);
+    color: #ffffff;
+    border: 1px solid rgba(192, 132, 252, 0.45);
+    box-shadow: 0 4px 18px -2px rgba(147, 51, 234, 0.45);
+  }
+
+  .btn-project-demo:hover {
+    background: linear-gradient(135deg, #a855f7 0%, #6b21a8 100%);
+    color: #ffffff;
+    border-color: #d8b4fe;
+    box-shadow: 0 6px 26px -2px rgba(168, 85, 247, 0.65);
+    transform: translateY(-2px);
+  }
+
+  :global(html[data-theme='light']) .btn-project-demo {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    border-color: #7c3aed;
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+  }
+
+  :global(html[data-theme='light']) .btn-project-demo:hover {
+    background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+  }
+
+  /* Code Button (Dark Obsidian Glass / Light Clean Button) */
+  .btn-project-code {
+    background: rgba(255, 255, 255, 0.04);
+    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .btn-project-code:hover {
+    background: rgba(255, 255, 255, 0.09);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  :global(html[data-theme='light']) .btn-project-code {
+    background: rgba(0, 0, 0, 0.03);
+    color: #18181b;
+    border: 1px solid var(--border-subtle);
+  }
+
+  :global(html[data-theme='light']) .btn-project-code:hover {
+    background: rgba(124, 58, 237, 0.08);
+    color: #6d28d9;
+    border-color: rgba(124, 58, 237, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .projects-section {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

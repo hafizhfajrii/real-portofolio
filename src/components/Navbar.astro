@@ -1,0 +1,536 @@
+---
+import { navItems, content, resumeUrl } from '../data/portfolio';
+---
+
+<header id="main-header" class="navbar-wrapper">
+  <div class="navbar-container container">
+    <!-- Brand Logo: Hafizh.dev -->
+    <a href="#hero" class="brand-logo" aria-label="Hafizh.dev">
+      <span class="brand-name">Hafizh</span><span class="brand-dot">.dev</span>
+    </a>
+
+    <!-- Desktop Nav Links (Clean Borderless Menu: Tentang, Keahlian, Project, Kontak) -->
+    <nav class="nav-center-pill" aria-label="Navigasi Utama">
+      <ul class="nav-menu">
+        {navItems.map((item, idx) => (
+          <li class="nav-item">
+            <a 
+              href={item.href} 
+              class={`nav-link ${idx === 0 ? 'active' : ''}`}
+              data-i18n-id={item.idLabel}
+              data-i18n-en={item.enLabel}
+            >
+              <span>{item.idLabel}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Right Actions: [ EN | ID ] Switcher & "CV / Resume" PDF CTA Button -->
+    <div class="nav-actions">
+      <!-- Language Switcher Toggle [ EN | ID ] (Retains Bordered Pill) -->
+      <div class="lang-switch-pill" role="group" aria-label="Pilih Bahasa / Language Selection">
+        <button id="lang-btn-en" class="lang-btn" data-lang="en" aria-label="English Language">
+          EN
+        </button>
+        <button id="lang-btn-id" class="lang-btn active" data-lang="id" aria-label="Bahasa Indonesia">
+          ID
+        </button>
+      </div>
+
+      <!-- "CV / Resume" Action Button (Opens PDF in New Tab) -->
+      <a 
+        href={resumeUrl} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="btn btn-emerald-pill nav-cta-btn" 
+        title="Lihat CV & Resume (PDF)"
+      >
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+        </svg>
+        <span data-i18n-id={content.id.nav.cvBtn} data-i18n-en={content.en.nav.cvBtn}>
+          {content.id.nav.cvBtn}
+        </span>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-toggle" class="mobile-toggle" aria-label="Buka Menu" aria-expanded="false">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <div class="mobile-lang-wrapper">
+        <span class="mobile-lang-label">Language / Bahasa:</span>
+        <div class="lang-switch-pill">
+          <button class="lang-btn mobile-lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn mobile-lang-btn active" data-lang="id">ID</button>
+        </div>
+      </div>
+
+      <ul class="mobile-nav-list">
+        {navItems.map((item) => (
+          <li>
+            <a 
+              href={item.href} 
+              class="mobile-nav-link"
+              data-i18n-id={item.idLabel}
+              data-i18n-en={item.enLabel}
+            >
+              {item.idLabel}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mobile-menu-footer">
+        <a 
+          href={resumeUrl} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn-emerald-pill" 
+          style="width: 100%;"
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+          </svg>
+          <span data-i18n-id={content.id.nav.cvBtn} data-i18n-en={content.en.nav.cvBtn}>
+            {content.id.nav.cvBtn}
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Navbar Scrolled Glassmorphism State
+  const header = document.getElementById('main-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  });
+
+  // Mobile Menu Toggle
+  const toggleBtn = document.getElementById('mobile-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+  function toggleMenu() {
+    const isOpen = mobileMenu?.classList.contains('active');
+    if (isOpen) {
+      mobileMenu?.classList.remove('active');
+      toggleBtn?.classList.remove('open');
+      toggleBtn?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    } else {
+      mobileMenu?.classList.add('active');
+      toggleBtn?.classList.add('open');
+      toggleBtn?.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  toggleBtn?.addEventListener('click', toggleMenu);
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (mobileMenu?.classList.contains('active')) {
+        toggleMenu();
+      }
+    });
+  });
+
+  // Active Nav Link ScrollSpy with Animated Underline
+  const sections = document.querySelectorAll('section[id]');
+  const desktopLinks = document.querySelectorAll('.nav-link');
+
+  function updateActiveNav() {
+    let current = '';
+    const scrollY = window.pageYOffset;
+    const windowBottom = scrollY + window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    // If near the bottom of the page, activate 'contact'
+    if (windowBottom >= docHeight - 120) {
+      current = 'contact';
+    } else {
+      sections.forEach((section) => {
+        const sectionEl = section as HTMLElement;
+        const sectionTop = sectionEl.offsetTop - 140;
+        const sectionHeight = sectionEl.offsetHeight;
+        const sectionId = sectionEl.getAttribute('id') || '';
+
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          current = sectionId;
+        }
+      });
+    }
+
+    if (!current && sections.length > 0) {
+      current = sections[0].getAttribute('id') || 'about';
+    }
+
+    desktopLinks.forEach((link) => {
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  window.addEventListener('DOMContentLoaded', updateActiveNav);
+  updateActiveNav();
+
+  // Smooth click interaction for desktop nav links
+  desktopLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const targetHref = link.getAttribute('href');
+      if (targetHref && targetHref.startsWith('#')) {
+        const targetSection = document.querySelector(targetHref);
+        if (targetSection) {
+          e.preventDefault();
+          const targetTop = (targetSection as HTMLElement).offsetTop - 70;
+          window.scrollTo({
+            top: targetTop,
+            behavior: 'smooth'
+          });
+          desktopLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .navbar-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: all 0.35s ease;
+  }
+
+  .navbar-wrapper.scrolled {
+    padding: 0.55rem 0;
+    background: rgba(3, 1, 6, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.9);
+  }
+
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  /* Brand Logo (Hafizh.dev) */
+  .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+  }
+
+  .brand-name {
+    color: #ffffff;
+    font-weight: 800;
+  }
+
+  .brand-dot {
+    color: var(--accent-purple-light);
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+
+  /* Center Nav Links (Clean Borderless Menu with Animated Underline) */
+  .nav-center-pill {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 0.35rem;
+    background: transparent;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 0.45rem 0.9rem;
+    transition: color 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Smooth Animated Glowing Cyber Amethyst Underline */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0.9rem;
+    right: 0.9rem;
+    height: 2px;
+    background: var(--accent-purple-neon);
+    border-radius: 99px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    box-shadow: 0 0 12px rgba(216, 180, 254, 0.85);
+  }
+
+  .nav-link:hover {
+    color: #ffffff;
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(0.5);
+    opacity: 0.45;
+  }
+
+  .nav-link.active {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .nav-link.active::after {
+    transform: scaleX(1);
+    opacity: 1;
+    box-shadow: 0 0 14px rgba(168, 85, 247, 0.95);
+  }
+
+  /* Nav Actions */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  /* Language Switcher Pill [ EN | ID ] (Retains Bordered Glass Pill) */
+  .lang-switch-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 0.22rem 0.35rem;
+    background: rgba(13, 8, 22, 0.9);
+    border: 1px solid rgba(168, 85, 247, 0.22);
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(12px);
+  }
+
+  .lang-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-full);
+    transition: var(--transition-smooth);
+    letter-spacing: 0.04em;
+  }
+
+  .lang-btn:hover {
+    color: #ffffff;
+  }
+
+  .lang-btn.active {
+    color: #030106;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(192, 132, 252, 0.35);
+  }
+
+  /* "CV / Resume" CTA Button (Bordered Purple Glass) */
+  .nav-cta-btn {
+    padding: 0.42rem 1.15rem;
+    font-size: 0.84rem;
+    gap: 0.45rem;
+  }
+
+  /* Mobile Toggle */
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    padding: 8px 6px;
+    cursor: pointer;
+  }
+
+  .hamburger-bar {
+    width: 100%;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: var(--transition-smooth);
+  }
+
+  .mobile-toggle.open .hamburger-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .mobile-toggle.open .hamburger-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-toggle.open .hamburger-bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* Mobile Drawer */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 65px);
+    background: rgba(3, 1, 6, 0.98);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    padding: 2rem 1.5rem;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: all 0.35s ease;
+  }
+
+  .mobile-menu.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .mobile-lang-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .mobile-lang-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  .mobile-nav-link {
+    font-size: 1.35rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: block;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  /* Light Theme Overrides */
+  :global(html[data-theme='light']) .navbar-wrapper.scrolled {
+    background: rgba(250, 247, 253, 0.94);
+    border-bottom: 1px solid rgba(147, 51, 234, 0.12);
+    box-shadow: 0 10px 30px -10px rgba(147, 51, 234, 0.1);
+  }
+
+  :global(html[data-theme='light']) .brand-logo,
+  :global(html[data-theme='light']) .brand-name {
+    color: #0f172a;
+  }
+
+  :global(html[data-theme='light']) .nav-link:hover,
+  :global(html[data-theme='light']) .nav-link.active {
+    color: #581c87;
+  }
+
+  :global(html[data-theme='light']) .lang-switch-pill {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(147, 51, 234, 0.2);
+  }
+
+  :global(html[data-theme='light']) .lang-btn.active {
+    color: #ffffff;
+    background: #7e22ce;
+    box-shadow: 0 0 10px rgba(147, 51, 234, 0.3);
+  }
+
+  :global(html[data-theme='light']) .mobile-menu {
+    background: rgba(250, 247, 253, 0.98);
+  }
+
+  @media (max-width: 900px) {
+    .nav-center-pill {
+      display: none;
+    }
+
+    .nav-cta-btn {
+      display: none;
+    }
+
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .mobile-menu {
+      display: block;
+    }
+  }
+</style>

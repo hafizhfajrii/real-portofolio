@@ -1,0 +1,518 @@
+---
+import { content, avatarUrl } from '../data/portfolio';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const defaultTitle = "Hafizh | Portofolio";
+const defaultDescription = content.id.heroAbout.tagline;
+
+const { 
+  title = defaultTitle,
+  description = defaultDescription
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Primary Meta Tags -->
+    <title id="page-title">{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Hafizh Ala'udin Fajri" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={avatarUrl} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={avatarUrl} />
+
+    <!-- Instant Theme Detection Script to prevent flash -->
+    <script is:inline>
+      const savedTheme = localStorage.getItem('user_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+  </head>
+  <body>
+    <!-- Ambient Background Lighting Orbs (Purple Glow) -->
+    <div class="ambient-bg" aria-hidden="true">
+      <div class="ambient-orb orb-1"></div>
+      <div class="ambient-orb orb-2"></div>
+      <div class="ambient-orb orb-3"></div>
+    </div>
+    
+    <!-- Minimalist Grid Texture Overlay -->
+    <div class="grid-pattern" aria-hidden="true"></div>
+
+    <!-- ========================================================
+         ✨ ULTRA-SMOOTH DUAL CURSOR EFFECT (Desktop)
+         ======================================================== -->
+    <div id="cursor-glow" class="cursor-spotlight" aria-hidden="true"></div>
+    <div id="cursor-dot" class="custom-cursor-dot" aria-hidden="true"></div>
+    <div id="cursor-ring" class="custom-cursor-ring" aria-hidden="true"></div>
+
+    <!-- Main Content Slot -->
+    <slot />
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <script>
+      // ==========================================================
+      // 💡 THEME (DARK / LIGHT) DYNAMIC ENGINE
+      // ==========================================================
+      function updateThemeUI(theme: 'dark' | 'light') {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('user_theme', theme);
+
+        // Update text on circular lamp toggle
+        const lampArcText = document.getElementById('lamp-mode-text');
+        if (lampArcText) {
+          lampArcText.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+        }
+      }
+
+      // @ts-ignore
+      window.toggleTheme = () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        const next = current === 'dark' ? 'light' : 'dark';
+        updateThemeUI(next);
+
+        // Feedback toast
+        const lang = document.documentElement.getAttribute('lang') || 'id';
+        // @ts-ignore
+        if (typeof window.showToast === 'function') {
+          const msg = next === 'light' 
+            ? (lang === 'en' ? 'Switched to Light Mode' : 'Mode Terang diaktifkan')
+            : (lang === 'en' ? 'Switched to Dark Mode' : 'Mode Gelap diaktifkan');
+          // @ts-ignore
+          window.showToast(msg, 'info');
+        }
+      };
+
+      // Initialize saved theme
+      const currentTheme = (localStorage.getItem('user_theme') as 'dark' | 'light') || 'dark';
+      updateThemeUI(currentTheme);
+
+      // ==========================================================
+      // 🌐 BILINGUAL (ID / EN) REACTIVE SWITCHER ENGINE
+      // ==========================================================
+      function updateLanguage(lang: 'id' | 'en') {
+        document.documentElement.setAttribute('lang', lang);
+        localStorage.setItem('user_lang', lang);
+
+        // Update all text elements with data-i18n attributes
+        const i18nElements = document.querySelectorAll('[data-i18n-id]');
+        i18nElements.forEach((el) => {
+          const idText = el.getAttribute('data-i18n-id');
+          const enText = el.getAttribute('data-i18n-en');
+          if (lang === 'en' && enText) {
+            el.textContent = enText;
+          } else if (lang === 'id' && idText) {
+            el.textContent = idText;
+          }
+        });
+
+        // Update placeholder inputs
+        const placeholderElements = document.querySelectorAll('[data-i18n-placeholder-id]');
+        placeholderElements.forEach((el) => {
+          const idPh = el.getAttribute('data-i18n-placeholder-id');
+          const enPh = el.getAttribute('data-i18n-placeholder-en');
+          if (lang === 'en' && enPh) {
+            el.setAttribute('placeholder', enPh);
+          } else if (lang === 'id' && idPh) {
+            el.setAttribute('placeholder', idPh);
+          }
+        });
+
+        // Update active class on all language toggle buttons
+        const allLangBtns = document.querySelectorAll('.lang-btn');
+        allLangBtns.forEach((btn) => {
+          if (btn.getAttribute('data-lang') === lang) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+
+        // Update document title
+        const titleEl = document.getElementById('page-title');
+        if (titleEl) {
+          titleEl.textContent = lang === 'en' 
+            ? "Hafizh | Portfolio"
+            : "Hafizh | Portofolio";
+        }
+      }
+
+      // Initialize saved language or default to 'id'
+      const savedLang = (localStorage.getItem('user_lang') as 'id' | 'en') || 'id';
+      updateLanguage(savedLang);
+
+      // Attach click events to all language toggle buttons
+      document.addEventListener('DOMContentLoaded', () => {
+        const langBtns = document.querySelectorAll('.lang-btn');
+        langBtns.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const chosenLang = (btn.getAttribute('data-lang') as 'id' | 'en') || 'id';
+            updateLanguage(chosenLang);
+            
+            // Show brief feedback toast
+            // @ts-ignore
+            if (typeof window.showToast === 'function') {
+              const msg = chosenLang === 'en' ? 'Language switched to English' : 'Bahasa diubah ke Indonesia';
+              // @ts-ignore
+              window.showToast(msg, 'info');
+            }
+          });
+        });
+      });
+
+      // ==========================================================
+      // ✨ ULTRA-SMOOTH FLUID CUSTOM CURSOR ENGINE
+      // ==========================================================
+      if (window.matchMedia('(pointer: fine)').matches) {
+        const dot = document.getElementById('cursor-dot');
+        const ring = document.getElementById('cursor-ring');
+        const glow = document.getElementById('cursor-glow');
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let ringX = mouseX;
+        let ringY = mouseY;
+        let isHovered = false;
+        let isMouseDown = false;
+        let isVisible = false;
+
+        window.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+
+          if (!isVisible && dot && ring && glow) {
+            isVisible = true;
+            dot.style.opacity = '1';
+            ring.style.opacity = '1';
+            glow.style.opacity = '1';
+          }
+
+          if (dot) {
+            dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+          }
+          if (glow) {
+            glow.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+          }
+        });
+
+        window.addEventListener('mouseleave', () => {
+          isVisible = false;
+          if (dot) dot.style.opacity = '0';
+          if (ring) ring.style.opacity = '0';
+          if (glow) glow.style.opacity = '0';
+        });
+
+        window.addEventListener('mousedown', () => {
+          isMouseDown = true;
+          ring?.classList.add('cursor-clicked');
+        });
+
+        window.addEventListener('mouseup', () => {
+          isMouseDown = false;
+          ring?.classList.remove('cursor-clicked');
+        });
+
+        // Hover effect on interactive elements
+        function attachHoverListeners() {
+          const interactives = document.querySelectorAll('a, button, .btn, .glass-card, .nav-link, .filter-btn, .lang-btn, .mini-tag-pill, input, textarea');
+          interactives.forEach((el) => {
+            el.addEventListener('mouseenter', () => {
+              isHovered = true;
+              ring?.classList.add('cursor-hovered');
+              dot?.classList.add('dot-hovered');
+            });
+            el.addEventListener('mouseleave', () => {
+              isHovered = false;
+              ring?.classList.remove('cursor-hovered');
+              dot?.classList.remove('dot-hovered');
+            });
+          });
+        }
+
+        // Run on load and DOM changes
+        attachHoverListeners();
+        setTimeout(attachHoverListeners, 1000);
+
+        // Smooth physics loop for trailing ring (60-120fps LERP)
+        function render() {
+          // LERP easing: ring smoothly catches up with mouse
+          ringX += (mouseX - ringX) * 0.16;
+          ringY += (mouseY - ringY) * 0.16;
+
+          if (ring) {
+            ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+          }
+
+          requestAnimationFrame(render);
+        }
+        requestAnimationFrame(render);
+      }
+
+      // ==========================================================
+      // 💬 Global Toast Notification Helper
+      // ==========================================================
+      window.showToast = (message: string, type: 'success' | 'info' | 'error' = 'success') => {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+
+        const toast = document.createElement('div');
+        toast.className = `toast-item toast-${type}`;
+        toast.innerHTML = `
+          <div class="toast-icon">
+            ${type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ'}
+          </div>
+          <div class="toast-message">${message}</div>
+        `;
+
+        container.appendChild(toast);
+
+        requestAnimationFrame(() => {
+          toast.classList.add('toast-show');
+        });
+
+        setTimeout(() => {
+          toast.classList.remove('toast-show');
+          setTimeout(() => toast.remove(), 400);
+        }, 3500);
+      };
+    </script>
+
+    <style is:global>
+      /* Hide default cursor on desktop */
+      @media (pointer: fine) {
+        body, a, button, input, textarea, select {
+          cursor: none !important;
+        }
+      }
+
+      /* Custom Cursor Dot (Neon Amethyst / Violet) */
+      .custom-cursor-dot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        background-color: var(--accent-purple-neon);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 10000;
+        opacity: 0;
+        margin-top: -3px;
+        margin-left: -3px;
+        transition: opacity 0.3s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+        box-shadow: 0 0 12px var(--accent-purple-neon);
+      }
+
+      .custom-cursor-dot.dot-hovered {
+        background-color: #ffffff;
+        box-shadow: 0 0 14px #ffffff;
+      }
+
+      /* Custom Cursor Ring (Smooth Trailing Royal Purple / Neon Violet) */
+      .custom-cursor-ring {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 32px;
+        height: 32px;
+        border: 1.5px solid rgba(168, 85, 247, 0.6);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0;
+        margin-top: -16px;
+        margin-left: -16px;
+        transition: opacity 0.3s ease, width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background-color 0.25s ease, margin 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* Cursor Hover State */
+      .custom-cursor-ring.cursor-hovered {
+        width: 52px;
+        height: 52px;
+        margin-top: -26px;
+        margin-left: -26px;
+        border-color: var(--accent-purple-neon);
+        background: rgba(147, 51, 234, 0.12);
+        box-shadow: 0 0 25px rgba(168, 85, 247, 0.45);
+      }
+
+      /* Cursor Click State */
+      .custom-cursor-ring.cursor-clicked {
+        width: 26px;
+        height: 26px;
+        margin-top: -13px;
+        margin-left: -13px;
+        border-color: #ffffff;
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      /* Ambient Cursor Glow Spotlight */
+      .cursor-spotlight {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        pointer-events: none;
+        margin-top: -250px;
+        margin-left: -250px;
+        background: radial-gradient(circle, rgba(147, 51, 234, 0.09) 0%, rgba(126, 34, 206, 0.03) 40%, transparent 70%);
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      /* Light Theme Cursor Overrides */
+      html[data-theme='light'] .custom-cursor-dot {
+        background-color: var(--accent-purple);
+        box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+      }
+
+      html[data-theme='light'] .custom-cursor-dot.dot-hovered {
+        background-color: #18181b;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+      }
+
+      html[data-theme='light'] .custom-cursor-ring {
+        border-color: rgba(124, 58, 237, 0.5);
+      }
+
+      html[data-theme='light'] .custom-cursor-ring.cursor-hovered {
+        border-color: #7c3aed;
+        background: rgba(124, 58, 237, 0.08);
+        box-shadow: 0 0 18px rgba(124, 58, 237, 0.2);
+      }
+
+      html[data-theme='light'] .custom-cursor-ring.cursor-clicked {
+        border-color: #18181b;
+        background: rgba(24, 24, 27, 0.1);
+      }
+
+      html[data-theme='light'] .cursor-spotlight {
+        background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 60%);
+      }
+
+      /* Toast Container */
+      .toast-container {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        pointer-events: none;
+      }
+
+      .toast-item {
+        pointer-events: auto;
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        padding: 0.9rem 1.4rem;
+        border-radius: var(--radius-md);
+        background: rgba(13, 8, 22, 0.96);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-glass);
+        box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.9), 0 0 20px rgba(147, 51, 234, 0.2);
+        color: var(--text-primary);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transform: translateY(20px) scale(0.95);
+        opacity: 0;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .toast-item.toast-show {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+
+      .toast-item.toast-success {
+        border-color: rgba(192, 132, 252, 0.5);
+      }
+
+      .toast-item.toast-success .toast-icon {
+        background: rgba(147, 51, 234, 0.25);
+        color: var(--accent-purple-neon);
+      }
+
+      .toast-item.toast-info {
+        border-color: rgba(168, 85, 247, 0.5);
+      }
+
+      .toast-item.toast-info .toast-icon {
+        background: rgba(126, 34, 206, 0.25);
+        color: var(--accent-purple-light);
+      }
+
+      html[data-theme='light'] .toast-item {
+        background: rgba(255, 255, 255, 0.98);
+        border: 1px solid var(--border-subtle);
+        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 0 15px rgba(124, 58, 237, 0.06);
+        color: #18181b;
+      }
+
+      html[data-theme='light'] .toast-item.toast-success {
+        border-color: rgba(124, 58, 237, 0.35);
+      }
+
+      html[data-theme='light'] .toast-item.toast-success .toast-icon {
+        background: rgba(124, 58, 237, 0.12);
+        color: #6d28d9;
+      }
+
+      html[data-theme='light'] .toast-item.toast-info {
+        border-color: rgba(109, 40, 217, 0.35);
+      }
+
+      html[data-theme='light'] .toast-item.toast-info .toast-icon {
+        background: rgba(109, 40, 217, 0.12);
+        color: #6d28d9;
+      }
+
+      .toast-icon {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 0.85rem;
+      }
+
+      @media (max-width: 640px) {
+        .toast-container {
+          left: 1rem;
+          right: 1rem;
+          bottom: 1.5rem;
+        }
+      }
+    </style>
+  </body>
+</html>
