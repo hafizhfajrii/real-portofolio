@@ -89,9 +89,9 @@ export const content = {
     },
     skills: {
       sectionTag: "Stack & Keahlian",
-      title: "Keahlian Teknologi &",
-      titleHighlight: "Alat AI, Data & Web",
-      subtitle: "Teknologi, framework, dan perangkat komputasi yang saya gunakan untuk membangun solusi cerdas end-to-end.",
+      title: "Teknologi &",
+      titleHighlight: "Infrastruktur",
+      subtitle: "Instrumen komputasi, framework, dan model kecerdasan buatan untuk membangun sistem digital cerdas.",
       relatedLabel: "Teknologi & Framework Terkait:"
     },
     projects: {
@@ -178,9 +178,9 @@ export const content = {
     },
     skills: {
       sectionTag: "Skills & Arsenal",
-      title: "Technical Arsenal &",
-      titleHighlight: "AI, Data & Web Stack",
-      subtitle: "The tools, frameworks, and technologies I leverage to architect end-to-end intelligent applications.",
+      title: "Technology &",
+      titleHighlight: "Infrastructure",
+      subtitle: "Computing instruments, frameworks, and artificial intelligence models to build intelligent digital systems.",
       relatedLabel: "Related Technologies & Frameworks:"
     },
     projects: {
